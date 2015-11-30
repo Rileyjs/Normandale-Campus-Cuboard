@@ -201,7 +201,8 @@ ActivateUserForm2
 NewWeekWorkSheet
 
 Application.DisplayAlerts = False
-ThisWorkbook.SaveAs Filename:="\\empfs1\ShrDirs\Inet\Private\Student Life\Service-Learning\Campus Cupboard\Program\Cupboard Startup\Update Master " & sheetLabel & "-" & sheetLabel + 1 & "USE THIS ONE!!.xlsm", FileFormat:=52
+' ThisWorkbook.SaveAs Filename:="\\empfs1\ShrDirs\Inet\Private\Student Life\Service-Learning\Campus Cupboard\Program\Cupboard Startup\Update Master " & sheetLabel & "-" & sheetLabel + 1 & "USE THIS ONE!!.xlsm", FileFormat:=52
+' UPDATE THIS ONE -> ThisWorkbook.SaveAs Filename:="C:\Users\Allen\Documents\Normandale\Cupboard\Test Folder\Update Master " & sheetLabel & "-" & sheetLabel + 1 & "USE THIS ONE!!.xlsm", FileFormat:=52
 Application.DisplayAlerts = True
 
 End Sub
