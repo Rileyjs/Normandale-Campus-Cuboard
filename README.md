@@ -13,7 +13,7 @@ Next, open the "New Year Workbook Template.xltm". If you do not have the Office 
  
 Now you can return to the excel sheet. Left-click on Macros and run the "NewWorkbookONLY" function. Fill in whatever dates you see fit. With this sheet open, go to the Generated Data sheet in the Test-Data folder. Select all of the tabs at the bottom, right-click and select "Move or Copy". Check Copy at the bottom and in the drop down box choose the sheet that says "Master". Click ok.  You now have a working test workbook. 
 
-Let me know if you have any further questions.
+Let me know if you have any further questions. Please read all issues before continuing.
 
  ***Important Note***
  
