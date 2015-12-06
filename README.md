@@ -16,4 +16,5 @@ Now you can return to the excel sheet. Left-click on Macros and run the "NewWork
 Let me know if you have any further questions.
 
  # Important Note
+ 
  Before you push anything to git, make sure you have deleted your file path in both "Master Sheet Macros.bas" and "New Year Workbook Template.xltm". If you do not know what I mean, please contact me.
