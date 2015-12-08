@@ -1,5 +1,6 @@
 Attribute VB_Name = "Module1"
 Private Sub NewWeekWorkSheet()
+    ' Sheet index
     Dim i As Integer
     
     Worksheets.Add After:=Sheets(Sheets.Count)
@@ -67,6 +68,7 @@ Sub NewWorkbookONLY()
         End
     End If
     
+    ' Assign Labels
     textNumItem = "Number of Items in "
     textNumVisits = "Number of Visits in "
     textUpdate = "Update this field "
@@ -78,6 +80,7 @@ Sub NewWorkbookONLY()
     textStart = "Start Page:"
     textEnd = "End Page:"
     
+    ' Inclusive ranges for borders
     Set rng1 = Range("A3:B15")
     Set rng2 = Range("A17:B17")
     Set rng3 = Range("A20:B31")
@@ -87,9 +90,10 @@ Sub NewWorkbookONLY()
     Set rng7 = Range("A33:E34")
     Set rng8 = Range("F23:G28")
     
-    
+    ' Labels cell A1
     Worksheets(1).Range("A1").Value = "Campus Cupboard Totals"
     
+    ' Set labels for monthly totals
     monthIndex = 8
     For cellIndex = 3 To 7
         Worksheets(1).Range("A" & cellIndex).Value = textNumVisits & MonthName(monthIndex)
@@ -129,7 +133,6 @@ Sub NewWorkbookONLY()
     Worksheets(1).Range("B31").Value = "Summer:"
     Worksheets(1).Range("B33").Value = "Date:"
     Worksheets(1).Range("B34").Value = "Date:"
-    
     Worksheets(1).Range("D17").Value = "Total Items Distributed this Year"
     
     For cellIndex = 23 To 28
@@ -150,13 +153,14 @@ Sub NewWorkbookONLY()
         Worksheets(1).Range("F" & cellIndex).Value = textWeight
     Next cellIndex
     
-    ' If some form of auto sizing is possible maybe us that?
+    ' If some form of auto sizing is possible maybe use that?
     Worksheets(1).Columns("A").ColumnWidth = 32.29
     Worksheets(1).Columns("B").ColumnWidth = 7.71
     Worksheets(1).Columns("C").ColumnWidth = 15.71
     Worksheets(1).Columns("D").ColumnWidth = 28.71
     Worksheets(1).Columns("F").ColumnWidth = 18.71
     
+    ' Set borders color and style
     With rng1.Borders
         .Weight = xlThin
         .ColorIndex = xlAutomatic
@@ -186,15 +190,16 @@ Sub NewWorkbookONLY()
         .ColorIndex = xlAutomatic
     End With
     
+    ' Text style formating
     Worksheets(1).Range("A1").Font.Size = 18
     Worksheets(1).Range("A1").Font.Bold = True
     Worksheets(1).Range("A1").WrapText = True
     Worksheets(1).Range("A18").Font.Color = vbRed
     Worksheets(1).Range("A26").WrapText = True
     Worksheets(1).Range("A33").WrapText = True
-    
     Worksheets(1).Range("F17").Font.Color = vbRed
     
+    ' Call ButtonMaker
     ButtonMaker
     
     sheetLabel = Year(Date) - 2000
