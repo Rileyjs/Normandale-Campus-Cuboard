@@ -3,10 +3,12 @@ Private Sub NewWeekWorkSheet()
     ' Sheet index
     Dim i As Integer
     
+    ' Sheets.Count outputs the number of current sheets (this number is the end of the Worksheets array)
     Worksheets.Add After:=Sheets(Sheets.Count)
     
     i = (Sheets.Count)
     
+    ' Sets Lables and style
     Worksheets(i).Range("A1") = "Date"
     Worksheets(i).Range("B1") = "ID"
     Worksheets(i).Range("C1") = "Items"
@@ -20,6 +22,7 @@ Private Sub NewWeekWorkSheet()
     Worksheets(i).Columns("D").ColumnWidth = 4
     Worksheets(i).Columns("E").ColumnWidth = 11
     
+    ' Sets the name of the Worksheet
     Worksheets(i).Name = Format(Date, "mm-dd-yy") & "(" & i & ")"
 
 End Sub
