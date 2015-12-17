@@ -1,0 +1,8 @@
+***Current Priorities***
+1) Comment all code
+2) Check all instances of calulate unique and identify why when no students are posted, 1 is generated as the total. See if this is a problem wnen calculating unique students.
+3) Verify that all reporting mechanisms are working properly, ie. outputing correct data.
+4) Clean code. Make code more readible and efficient.
+
+***Future Projects***
+1) Make the weekly reports and calculate unique programs able to report on only the data withing a user specified range of dates. As it currently stands, all of the data is based on the weekly numbers. However, since we have the dates for all of the data in column one, reworking these programs to rely on a date range instead of a sheet range, should be fairly easy.
