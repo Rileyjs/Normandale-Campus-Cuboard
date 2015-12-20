@@ -1,4 +1,6 @@
 Attribute VB_Name = "Module1"
+
+' NewWeekWorkSheet creates a new worksheet for the week, with appropriate column widths and labels
 Private Sub NewWeekWorkSheet()
     ' Sheet index
     Dim i As Integer
@@ -26,6 +28,10 @@ Private Sub NewWeekWorkSheet()
     Worksheets(i).Name = Format(Date, "mm-dd-yy") & "(" & i & ")"
 
 End Sub
+
+' WeeklyReportsP1 closes out the last sheet on the workbook. To do this, it calls TotalVists, which totals the number
+' of students that used the cupboard this reporting week. It calls UserForm3, which then tallies the data for the sheets
+' selected by the user and posts that data to the Totals page.
 Private Sub WeeklyReportsP1()
     Dim Items, Unique, Visits, B_ColCounter As Integer
     
@@ -53,16 +59,26 @@ Private Sub WeeklyReportsP1()
     ActivateUserForm3
 
 End Sub
+
+' ActivateUserForm calls UserForm1, which is the primary form for day-today data entry.
 Sub ActivateUserForm()
 ' Display form for inputing a person
     UserForm1.Show
 End Sub
+
+' ForReentryONLY calls a userform (Reentry) that is similar to UserForm1, but also includes boxes for Time and Date.
+' This should only be used in instances of data loss.
 Sub ForReentryONLY()
 ' Displays Reentry window
     Reentry.Show
 End Sub
+
+' NewWorkbookONLY transforms the template excel workbook into a fully functional workbook ready for use at the beginning
+' of a new school year. General flow: Format the totals page -> call ButtonMaker, which creates buttons for the reporting
+' programs on the totals page -> call UserForm3, which gets the start and end dates of the school year -> saves the 
+' workbook with the correct label and file format.
 Sub NewWorkbookONLY()
-' Generates new workbook to be saved at file adress near bottom of sub
+' Generates new workbook to be saved at file address near bottom of sub
     Dim textNumItem, textNumVisits, textUpdate, textWeek, textSemester, textStudents, textCount, textStart, textEnd, textReport As String
     Dim monthIndex, cellIndex, sheetLabel As Integer
     Dim rng1, rng2, rng3, rng4, rng5, rng6, rng7 As Range
@@ -220,6 +236,8 @@ Sub NewWorkbookONLY()
     Application.DisplayAlerts = True
 
 End Sub
+
+' ButtonMaker creates the buttons for the totals page. It's currently only called by the NewWorkBookONLY sub.
 Private Sub ButtonMaker()
     Dim Report1, Report2, Unique, NewWork As Button
     Dim Targeter As Range
@@ -257,10 +275,15 @@ Private Sub ButtonMaker()
     End With
 
 End Sub
+
+' Calls UserForm2, which gets the start and end dates of the school year from the user.
 Private Sub ActivateUserForm2()
 ' Displays user form for new school year workbook
     UserForm2.Show
 End Sub
+
+' TotalVisits is a counter that starts at 1, if the Student ID in the next row is different than the one in the current row
+' then the counter is incremented. Returns the final count.
 Private Function TotalVisits(totalRows As Integer)
     Dim currentRow As Integer
     
@@ -273,10 +296,14 @@ Private Function TotalVisits(totalRows As Integer)
         Next currentRow
     End If
 End Function
+
+' ActivateUserForm3 calls UserForm3, which is used for weekly reporting
 Private Sub ActivateUserForm3()
-' Displays window for monthly reporting
+' Displays window for weekly reporting
     UserForm3.Show
 End Sub
+
+' ActivateUserForm4 calls UserForm4, which is used for calulating unique students in the a range of sheets.
 Private Sub ActivateUserForm4()
 ' Displays form for calculating unique IDs
     UserForm4.Show
