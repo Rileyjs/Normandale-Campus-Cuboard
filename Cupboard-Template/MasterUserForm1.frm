@@ -96,10 +96,11 @@ End Sub
 Private Sub LineFill(currentBox As Integer, currentRows As Integer, itemCount As Integer)
    ' Fills rows based on quantity box     
    For entryCounter = 1 To itemCount
-      ' Fills A and B with date and techID(textbox1.value)
+      ' Fills A and B with date and techID (textbox1.value)
        Worksheets(Sheets.Count).Range("A" & currentRows).Value = Date
        Worksheets(Sheets.Count).Range("B" & currentRows).Value = TextBox1.Value
        
+       ' Fills in column C with the appropriate item, depending on the current ComboBox.
        Select Case currentBox
            Case 1
                Worksheets(Sheets.Count).Range("C" & currentRows).Value = ComboBox1.Value
@@ -109,8 +110,11 @@ Private Sub LineFill(currentBox As Integer, currentRows As Integer, itemCount As
                Worksheets(Sheets.Count).Range("C" & currentRows).Value = ComboBox3.Value
        End Select
        
+       ' Fills in Column D and E with finacial need box (ComboBox7.Value) and time
        Worksheets(Sheets.Count).Range("D" & currentRows).Value = ComboBox7.Value
        Worksheets(Sheets.Count).Range("E" & currentRows).Value = Format(Time, "h:mm AM/PM")
+       
+       ' Moves focus to the next row
        currentRows = currentRows + 1
    Next entryCounter
 End Sub
