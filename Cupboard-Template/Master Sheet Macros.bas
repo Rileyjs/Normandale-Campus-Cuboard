@@ -99,6 +99,8 @@ Sub NewWorkbookONLY()
     Dim monthIndex, cellIndex, sheetLabel As Integer
     Dim rng1, rng2, rng3, rng4, rng5, rng6, rng7 As Range
     
+    ' This check is to make sure that if the program is run a second time on the same workbook, it doesn't actually make any changes.
+    ' It could possibly be improved if there were some function that returns whether a workbook is empty or not.
     If Worksheets(1).Range("A1").Value <> "" Then
         End
     End If
@@ -255,17 +257,27 @@ End Sub
 
 ' ButtonMaker creates the buttons for the totals page. It's currently only called by the NewWorkBookONLY sub.
 Private Sub ButtonMaker()
+    ' Button objects that will be placed and given width/height values later. May be possible to initilize them with their width and
+    ' height earlier.
     Dim Report1, Report2, Unique, NewWork As Button
+    ' Targeter will be a range varible to set the location of the button to be placed.
     Dim Targeter As Range
     
+    ' Sets the target cell to G3 (note the column value comes second in the cell function)
     Set Targeter = Worksheets(1).Cells(3, 7)
+    ' Places the Report1 button at the top-left of the targeted cell, with the specified W and H
     Set Report1 = Worksheets(1).Buttons.Add(Targeter.Left, Targeter.Top, Width:=144, Height:=24)
+    ' Sets the attributes of Report1
     With Report1
+        ' Program to call on action
         .OnAction = "WeeklyReportsP1"
+        ' Caption visible to user
         .Caption = "Weekly Reports"
+        ' Name in VBA
         .Name = "Weekly Reports"
     End With
-                
+    
+    ' The next buttons work the same as the first, with different target cells, actions, captions, and names.            
     Set Targeter = Worksheets(1).Cells(7, 7)
     Set Report2 = Worksheets(1).Buttons.Add(Targeter.Left, Targeter.Top, Width:=144, Height:=24)
     With Report2
@@ -299,18 +311,24 @@ Private Sub ActivateUserForm2()
 End Sub
 
 ' TotalVisits is a counter that starts at 1, if the Student ID in the next row is different than the one in the current row
-' then the counter is incremented. Returns the final count.
+' then the counter is incremented. Passed totalRows. Returns the final count.
 Private Function TotalVisits(totalRows As Integer)
     Dim currentRow As Integer
     
+    ' Checks that there is more than just a label in Column B
     If Worksheets(Sheets.Count).Cells(2, 2).Value <> "" Then
+        ' Since there is data in B2, we assume that at least 1 student has visted.
         TotalVisits = 1
+        
+        ' Loop compares the ID in the current row to the one before it, if different TotalVisits is incremented.
         For currentRow = 3 To totalRows
             If Worksheets(Sheets.Count).Cells(currentRow, 2).Value <> Worksheets(Sheets.Count).Cells(currentRow - 1, 2).Value Then
                 TotalVisits = TotalVisits + 1
             End If
         Next currentRow
     End If
+' This looks weird, and I recommend that you check out the documentation on this, but it appears that TotalVisits acts as a fuction
+' and an Integer varible. Meaning that it returns itself as a value.
 End Function
 
 ' ActivateUserForm3 calls UserForm3, which is used for weekly reporting
