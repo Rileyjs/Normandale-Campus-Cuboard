@@ -1,18 +1,19 @@
 VERSION 5.00
-Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserForm1 
+Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} DataEntry 
    Caption         =   "Data Entry"
    ClientHeight    =   4125
    ClientLeft      =   45
    ClientTop       =   375
    ClientWidth     =   6975
-   OleObjectBlob   =   "MasterUserForm1.frx":0000
+   OleObjectBlob   =   "DataEntry.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
-Attribute VB_Name = "UserForm1"
+Attribute VB_Name = "DataEntry"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
 ' Start place for editing
 Private Sub CommandButton1_Click()
 ' Click 'OK' on UserForm1
