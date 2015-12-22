@@ -1,9 +1,8 @@
 ***Current Priorities***
-1) Comment all code
-2) Check all instances of calulate unique and identify why when no students are posted, 1 is generated as the total. See if this is a
-problem wnen calculating unique students.
-3) Verify that all reporting mechanisms are working properly, ie. outputing correct data.
-5) Given that UserForm1 and Reentry only differ slightly, it would be best to create a function that they can both call to reduce code
+1) Check all instances of calulate unique and identify why when no students are posted, 1 is generated as the total. See if this is a
+problem when calculating unique students.
+2) Verify that all reporting mechanisms are working properly, ie. outputing correct data.
+3) Given that UserForm1 and Reentry only differ slightly, it would be best to create a function that they can both call to reduce code
 bulk.
 4) Clean code. Make code more readible and efficient.
 
@@ -11,3 +10,4 @@ bulk.
 1) Make the weekly reports and calculate unique programs able to report on only the data withing a user specified range of dates. As it
 currently stands, all of the data is based on the weekly numbers. However, since we have the dates for all of the data in column one,
 reworking these programs to rely on a date range instead of a sheet range, should be fairly easy.
+2) Create a UI that incoorperates all of the buttons on the totals page. This would effectively emlimiate the buttons on the totals page.
