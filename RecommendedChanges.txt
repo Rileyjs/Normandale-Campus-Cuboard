@@ -2,7 +2,7 @@
 1) Check all instances of calulate unique and identify why when no students are posted, 1 is generated as the total. See if this is a
 problem when calculating unique students.
 2) Verify that all reporting mechanisms are working properly, ie. outputing correct data.
-3) Given that UserForm1 and Reentry only differ slightly, it would be best to create a function that they can both call to reduce code
+3) Given that DataEntry and Reentry only differ slightly, it would be best to create a function that they can both call to reduce code
 bulk.
 4) Clean code. Make code more readible and efficient.
 
