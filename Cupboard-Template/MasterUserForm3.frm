@@ -21,23 +21,28 @@ Attribute VB_Exposed = False
 Private Sub CommandButton1_Click()
 Dim StartPage, EndPage, MonthCode, PageCounter, A_ColCounter, TotalItems, TotalVisits As Integer
 
+' The +2 accounts for the totals page and that the list index starts at 0, while the page index starts at 1.
 StartPage = ComboBox1.listIndex + 2
 EndPage = ComboBox2.listIndex + 2
 MonthCode = ComboBox3.Value
 TotalItems = 0
 TotalVisits = 0
 
+' Check for valid month entry.
 If 1 > MonthCode Or MonthCode > 12 Then
     MsgBox ("Please Enter Valid Month Code between 1-12")
     End
 End If
 
 For PageCounter = StartPage To EndPage
+    ' Finds the number of rows with data
     A_ColCounter = Worksheets(PageCounter).Cells(Rows.Count, 1).End(xlUp).Row
+    ' sums the values from the totals section at the bottom of the sheet.
     TotalItems = TotalItems + Worksheets(PageCounter).Cells(A_ColCounter + 3, 4)
     TotalVisits = TotalVisits + Worksheets(PageCounter).Cells(A_ColCounter + 2, 4)
 Next PageCounter
 
+' This block writes the collected data to the correct month on the totals page.
 Select Case MonthCode
     Case 8
         If Worksheets(1).Range("B14") = "" Then
@@ -82,8 +87,10 @@ Select Case MonthCode
         Worksheets(1).Range("E14") = TotalItems
 End Select
 
+' Leftover from a previous version. Should consider removing.
 Worksheets(1).Range("J1:K3") = ""
 
+' Closes the UserForm
 Unload Me
 End Sub
 
@@ -91,22 +98,26 @@ End Sub
 Sub UserForm_Initialize()
 Dim TargetMonth(11), listIndex, sheetIndex As Integer
 
+' This block fills the first ComboBox with the sheet lables starting with the second sheet (the sheet after the totals page).
 sheetIndex = 2
 For listIndex = 0 To Sheets.Count - 2
     ComboBox1.AddItem Worksheets(sheetIndex).Name
     sheetIndex = sheetIndex + 1
 Next listIndex
 
+' Same as above.
 sheetIndex = 2
 For listIndex = 0 To Sheets.Count - 2
     ComboBox2.AddItem Worksheets(sheetIndex).Name
     sheetIndex = sheetIndex + 1
 Next listIndex
 
+' Adds 1-12 to the month select list
 For listIndex = 0 To 11
     ComboBox3.AddItem listIndex + 1
 Next listIndex
 
+' Sets defaults to the first item in each list.
 ComboBox1.Value = ComboBox1.List(0)
 ComboBox2.Value = ComboBox2.List(0)
 ComboBox3.Value = 1
