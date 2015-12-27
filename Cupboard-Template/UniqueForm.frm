@@ -19,41 +19,55 @@ Attribute VB_Exposed = False
 
 ' OK button action
 Private Sub CommandButton1_Click()
-Dim PageCounter, MainPageRows, CurrPageRows, TotalMainRows, StartPage, EndPage, TotalUnique As Integer
+    Dim uniqueCount As Long
+    Dim dict As New Scripting.Dictionary ' Requires Microsoft Scripting Runtime.  Tools->References->Microsoft Scripting Runtime. Otherwise user-defined type error
+    Dim studentID As Long
+    Dim row As Integer
 
-If ComboBox1.listIndex <> 0 Then
-    StartPage = ComboBox1.listIndex + 1
-    EndPage = ComboBox2.listIndex + 1
-Else
-    StartPage = 2
-    EndPage = Sheets.Count
-End If
 
-For PageCounter = StartPage To EndPage
-    If Worksheets(1).Range("M1") = "" Then MainPageRows = 1 Else: MainPageRows = Worksheets(1).Cells(Rows.Count, 13).End(xlUp).Row
-    If Worksheets(PageCounter).Range("B2") = "" Then CurrPageRows = 1 Else: CurrPageRows = Worksheets(PageCounter).Cells(Rows.Count, 2).End(xlUp).Row
-    TotalMainRows = MainPageRows + CurrPageRows
-    Worksheets(PageCounter).Range("B2:B" & CurrPageRows).Copy Destination:=Worksheets(1).Range("M" & MainPageRows & ":M" & TotalMainRows)
-Next PageCounter
+    'Sets the range of sheets being used
+    If ComboBox1.listIndex <> 0 Then
+        StartPage = ComboBox1.listIndex + 1
+        EndPage = ComboBox2.listIndex + 1
+    Else
+        StartPage = 2
+        EndPage = Sheets.Count
+    End If
 
-Worksheets(1).Range("M1:M50000").AdvancedFilter Action:=xlFilterCopy, CopyToRange:=Worksheets(1).Range("N1"), Unique:=True
-TotalUnique = Worksheets(1).Cells(Rows.Count, 14).End(xlUp).Row
-TotalUnique = TotalUnique - 1
+    uniqueCount = 0
+    
+    ' Loops through sheets, runs through B column til empty cell found the moves to new sheet. Checks IDs against dictionary to check for uniqueness
+    For PageCounter = StartPage To EndPage
+        row = 2
+        ' If cell is empty default return value is 0
+        studentID = Worksheets(PageCounter).Cells(row, 2).Value
 
-Select Case ComboBox1.listIndex
-    Case 0
-        Worksheets(1).Range("C33") = Date
-        Worksheets(1).Range("E33") = TotalUnique
-    Case Else
-        Worksheets(1).Range("A34") = "Unique Students Between " & ComboBox1.Value & " & " & ComboBox2.Value
-        Worksheets(1).Range("C34") = Date
-        Worksheets(1).Range("E34") = TotalUnique
-End Select
+        Do While studentID <> 0
+            If Not dict.Exists(studentID) Then
+                dict.Add studentID, 1
+                uniqueCount = uniqueCount + 1
+            End If
+            row = row + 1
+            studentID = Worksheets(PageCounter).Cells(row, 2).Value
+        Loop
 
-Worksheets(1).Range("M1:M50000") = ""
-Worksheets(1).Range("N1:N50000") = ""
+    Next PageCounter
 
-Unload Me
+    ' Unload the dictionary
+     Set dict = Nothing
+
+    ' Feed the data back onto the main sheet
+    Select Case ComboBox1.listIndex
+        Case 0
+            Worksheets(1).Range("C33") = Date
+            Worksheets(1).Range("E33") = uniqueCount
+        Case Else
+            Worksheets(1).Range("A34") = "Unique Students Between " & ComboBox1.Value & " & " & ComboBox2.Value
+            Worksheets(1).Range("C34") = Date
+            Worksheets(1).Range("E34") = uniqueCount
+    End Select
+
+    Unload Me
 End Sub
 
 ' Initilizes UserForm
